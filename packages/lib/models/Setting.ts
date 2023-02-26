@@ -740,6 +740,7 @@ class Setting extends BaseModel {
 			'sync.7.auth': { value: '', type: SettingItemType.String, public: false },
 			'sync.9.auth': { value: '', type: SettingItemType.String, public: false },
 			'sync.10.auth': { value: '', type: SettingItemType.String, public: false },
+			'sync.11.auth': { value: '', type: SettingItemType.String, public: false },
 			'sync.1.context': { value: '', type: SettingItemType.String, public: false },
 			'sync.2.context': { value: '', type: SettingItemType.String, public: false },
 			'sync.3.context': { value: '', type: SettingItemType.String, public: false },
@@ -750,6 +751,7 @@ class Setting extends BaseModel {
 			'sync.8.context': { value: '', type: SettingItemType.String, public: false },
 			'sync.9.context': { value: '', type: SettingItemType.String, public: false },
 			'sync.10.context': { value: '', type: SettingItemType.String, public: false },
+			'sync.11.context': { value: '', type: SettingItemType.String, public: false },
 
 			'sync.maxConcurrentConnections': { value: 5, type: SettingItemType.Int, storage: SettingStorage.File, isGlobal: true, public: true, advanced: true, section: 'sync', label: () => _('Max concurrent connections'), minimum: 1, maximum: 20, step: 1 },
 
@@ -1670,12 +1672,6 @@ class Setting extends BaseModel {
 			// 	storage: SettingStorage.File,
 			// },
 
-			'sync.allowUnsupportedProviders': {
-				value: -1,
-				type: SettingItemType.Int,
-				public: false,
-			},
-
 		};
 
 		this.metadata_ = Object.assign(this.metadata_, this.customMetadata_);
@@ -1714,7 +1710,6 @@ class Setting extends BaseModel {
 
 			if (this.isSet(migration.name)) {
 				logger.info('Skipping because value is already set');
-				continue;
 			} else {
 				logger.info(`Applying previous default: ${migration.previousDefault}`);
 				this.setValue(migration.name, migration.previousDefault);

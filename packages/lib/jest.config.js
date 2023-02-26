@@ -1,6 +1,7 @@
 module.exports = {
 	testMatch: [
 		'**/*.test.js',
+		'**/*.test.ts',
 	],
 
 	testPathIgnorePatterns: [
@@ -13,4 +14,6 @@ module.exports = {
 
 	setupFilesAfterEnv: [`${__dirname}/jest.setup.js`],
 	slowTestThreshold: 40,
+
+	preset: 'ts-jest',
 };

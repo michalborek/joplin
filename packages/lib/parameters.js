@@ -22,6 +22,10 @@ parameters_.dev = {
 		id: 'cx9li9ur8taq1z7',
 		secret: 'i8f9a1mvx3bijrt',
 	},
+	pcloud: {
+		id: 'h0J2TpkWrjQ',
+		secret: 'kG0uYi3IO1hSMHi0n55eHQl1lEPk',
+	},
 };
 
 parameters_.prod = {
@@ -36,6 +40,10 @@ parameters_.prod = {
 	dropbox: {
 		id: 'm044w3cvmxhzvop',
 		secret: 'r298deqisz0od56',
+	},
+	pcloud: {
+		id: 'L2Cc125pQQH',
+		secret: 'RCDd4xgCwPyApYjq9BsH3pCy2dfk',
 	},
 };
 
