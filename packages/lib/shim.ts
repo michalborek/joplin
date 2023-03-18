@@ -246,7 +246,7 @@ const shim = {
 		throw new Error('Not implemented');
 	},
 
-	httpAgent: () => {
+	httpAgent: (_url: any = null) => {
 		throw new Error('Not implemented');
 	},
 

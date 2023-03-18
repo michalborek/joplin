@@ -110,7 +110,7 @@ def enableProguardInReleaseBuilds = false
  * give correct results when using with locales other than en-US.  Note that
  * this variant is about 6MiB larger per architecture than default.
  */
- 
+
 // We need the intl variant to support natural sorting of notes.
 // https://github.com/laurent22/joplin/pull/4272
 def jscFlavor = 'org.webkit:android-jsc-intl:+'
@@ -155,13 +155,13 @@ android {
 		// ndk {
 		// 	abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
 		// }
-		
+
         // https://github.com/react-native-community/react-native-camera/issues/2138
         missingDimensionStrategy 'react-native-camera', 'general'
 
         // Needed to fix: The number of method references in a .dex file cannot exceed 64K
         multiDexEnabled true
-        
+
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -299,7 +299,7 @@ dependencies {
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    
+
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
@@ -326,6 +326,12 @@ dependencies {
 
     // Needed to fix: The number of method references in a .dex file cannot exceed 64K
     implementation 'com.android.support:multidex:2.0.1'
+
+    // used for pCloud integration
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 if (isNewArchitectureEnabled()) {

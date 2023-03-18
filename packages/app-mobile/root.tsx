@@ -1,3 +1,4 @@
+
 const React = require('react');
 import shim from '@joplin/lib/shim';
 shim.setReact(React);
@@ -26,6 +27,7 @@ import { setLocale, closestSupportedLocale, defaultLocale } from '@joplin/lib/lo
 import SyncTargetJoplinServer from '@joplin/lib/SyncTargetJoplinServer';
 import SyncTargetJoplinCloud from '@joplin/lib/SyncTargetJoplinCloud';
 import SyncTargetOneDrive from '@joplin/lib/SyncTargetOneDrive';
+import SyncTargetPCloud from '@joplin/lib/SyncTargetPCloud';
 import initProfile from '@joplin/lib/services/profileConfig/initProfile';
 const VersionInfo = require('react-native-version-info').default;
 const { Keyboard, NativeModules, BackHandler, Animated, View, StatusBar, Platform, Dimensions } = require('react-native');
@@ -66,6 +68,7 @@ const { SearchScreen } = require('./components/screens/search.js');
 const { OneDriveLoginScreen } = require('./components/screens/onedrive-login.js');
 import EncryptionConfigScreen from './components/screens/encryption-config';
 const { DropboxLoginScreen } = require('./components/screens/dropbox-login.js');
+import PCloudLoginScreen from './components/screens/PCloudLoginScreen';
 const { MenuContext } = require('react-native-popup-menu');
 import SideMenu from './components/SideMenu';
 import SideMenuContent from './components/side-menu-content';
@@ -95,6 +98,7 @@ SyncTargetRegistry.addClass(SyncTargetFilesystem);
 SyncTargetRegistry.addClass(SyncTargetAmazonS3);
 SyncTargetRegistry.addClass(SyncTargetJoplinServer);
 SyncTargetRegistry.addClass(SyncTargetJoplinCloud);
+SyncTargetRegistry.addClass(SyncTargetPCloud);
 
 import FsDriverRN from './utils/fs-driver-rn';
 import DecryptionWorker from '@joplin/lib/services/DecryptionWorker';
@@ -203,6 +207,7 @@ function historyCanGoBackTo(route: any) {
 	// it can be buggy to do so, due to incorrectly relying on global state (reg.syncTarget...)
 	if (route.routeName === 'OneDriveLogin') return false;
 	if (route.routeName === 'DropboxLogin') return false;
+	if (route.routeName === 'PCloudLogin') return false;
 
 	return true;
 }
@@ -967,6 +972,7 @@ class AppComponent extends React.Component {
 			Folder: { screen: FolderScreen },
 			OneDriveLogin: { screen: OneDriveLoginScreen },
 			DropboxLogin: { screen: DropboxLoginScreen },
+			PCloudLogin: { screen: PCloudLoginScreen },
 			EncryptionConfig: { screen: EncryptionConfigScreen },
 			UpgradeSyncTarget: { screen: UpgradeSyncTargetScreen },
 			ProfileSwitcher: { screen: ProfileSwitcher },

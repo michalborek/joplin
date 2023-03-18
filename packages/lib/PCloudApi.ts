@@ -1,7 +1,6 @@
 import shim from './shim';
 import time from './time';
 import Logger from './Logger';
-import * as https from 'https';
 
 const { stringify } = require('query-string');
 const Buffer = require('buffer').Buffer;
@@ -218,7 +217,7 @@ export default class PCloudApi {
 		for (let i = 0; i < 5; i++) {
 			options.headers['Authorization'] = `bearer ${this.token}`;
 			options.headers['User-Agent'] = `ISV|Joplin|Joplin/${shim.appVersion()}`;
-			const handleRequestRepeat = async (error: any, sleepSeconds: number = null) => {
+			const handleRequestRepeat = async (_: any, sleepSeconds: number = null) => {
 				sleepSeconds ??= (i + 1) * 5;
 				logger.info(`Got error below - retrying (${i})...`);
 				await time.sleep(sleepSeconds);
@@ -302,10 +301,7 @@ export default class PCloudApi {
 	}
 
 	async readRemoteFileContent(method: HttpMethod, path: string, options: any = {}): Promise<string> {
-		options.agent = new https.Agent({
-			keepAlive: true,
-			keepAliveMsecs: 1000,
-		});
+		options.agent = shim.httpAgent('https://');
 		const response = await this.exec(method, 'file_open', { flags: 0, path: `/${path}` }, null, options);
 		if (!response.ok) {
 			logger.error(`Error reading file content ${path}`, response.error);
@@ -326,10 +322,7 @@ export default class PCloudApi {
 	}
 
 	async execContent(method: HttpMethod, path: string, options: any = {}) {
-		options.agent = new https.Agent({
-			keepAlive: true,
-			keepAliveMsecs: 10000,
-		});
+		options.agent = shim.httpAgent('https://');
 		const response = await this.exec(method, 'file_open', { flags: 0, path: `/${path}` }, null, options);
 		if (!response.ok) {
 			logger.error(`Error reading file content ${path}`, response.error);

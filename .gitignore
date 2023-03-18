@@ -459,7 +459,6 @@ packages/lib/JoplinServerApi.js
 packages/lib/Logger.js
 packages/lib/ObjectUtils.js
 packages/lib/PCloudApi.js
-packages/lib/PCloudApi.test.js
 packages/lib/PCloudApiNodeUtils.js
 packages/lib/PoorManIntervals.js
 packages/lib/SyncTargetJoplinCloud.js
